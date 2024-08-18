@@ -5,7 +5,10 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
 
 @Service
 public class PlateService {
@@ -23,37 +26,38 @@ public class PlateService {
 
     @PostConstruct
     public void init() {
-        loadFromFile(polishPlatesFile, polishPlates);
-        loadFromFile(englishPlatesFile, englishPlates);
+        loadPlatesFromFile(polishPlatesFile, polishPlates);
+        loadPlatesFromFile(englishPlatesFile, englishPlates);
     }
 
     public String getPolishPlate(String prefix) {
-        Collections.shuffle(polishPlates);
-        return polishPlates.stream()
-                .filter(element -> element.length() <= 5 || element.startsWith(prefix))
-                .findFirst().orElse(null);
+        return getPlates(prefix, polishPlates);
     }
 
     public String getPolishPlate(String prefix, int length) {
-        Collections.shuffle(polishPlates);
-        return polishPlates.stream().filter(element -> element.length() == length ||
-                        (element.length() > length &&
-                                element.startsWith(prefix) &&
-                                element.contains(" ") &&
-                                element.substring(3).length() == length))
-                .findFirst().orElse(null);
+        return getPlates(prefix, polishPlates, length);
     }
 
     public String getEnglishPlate(String prefix) {
-        Collections.shuffle(polishPlates);
-        return englishPlates.stream()
+        return getPlates(prefix, englishPlates);
+    }
+
+    public String getEnglishPlate(String prefix, int length) {
+        return getPlates(prefix, englishPlates, length);
+    }
+
+    private String getPlates(String prefix, List<String> platesCollection) {
+        Collections.shuffle(platesCollection);
+
+        return platesCollection.stream()
                 .filter(element -> element.length() <= 5 || element.startsWith(prefix))
                 .findFirst().orElse(null);
     }
 
-    public String getEnglishPlate(String prefix, int length) {
-        Collections.shuffle(polishPlates);
-        return englishPlates.stream().filter(element -> element.length() == length ||
+    private String getPlates(String prefix, List<String> platesCollection, int length) {
+        Collections.shuffle(platesCollection);
+
+        return platesCollection.stream().filter(element -> element.length() == length ||
                         (element.length() > length &&
                                 element.startsWith(prefix) &&
                                 element.contains(" ") &&
@@ -61,7 +65,7 @@ public class PlateService {
                 .findFirst().orElse(null);
     }
 
-    private void loadFromFile(File file, List<String> list) {
+    private void loadPlatesFromFile(File file, List<String> list) {
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 list.add(scanner.nextLine());

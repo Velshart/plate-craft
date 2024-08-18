@@ -2,7 +2,6 @@ package me.mmtr.platecraft.controller;
 
 import me.mmtr.platecraft.record.Plate;
 import me.mmtr.platecraft.service.PlateService;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
