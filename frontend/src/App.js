@@ -37,7 +37,7 @@ function App() {
                 </p>
 
                 <FormControl className={"prefixes-form"}>
-                    <InputLabel id="select-label" className={"prefixes-form-input-label"}  sx={{ color: 'white' }}>
+                    <InputLabel id="select-label" className={"prefixes-form-input-label"} sx={{color: 'white'}}>
                         select a custom license plate prefix used in your Voivodeship
                     </InputLabel>
 
@@ -76,7 +76,8 @@ function App() {
                     </Button>
                 </div>
 
-                <input className={"generated-plate-input"} type={"text"} value={generatedPlateInputText} readOnly={true}/>
+                <input className={"generated-plate-input"} type={"text"} value={generatedPlateInputText}
+                       readOnly={true}/>
 
                 {error && <p className="error-message">{error}</p>}
             </h2>
@@ -88,4 +89,5 @@ function App() {
         </div>
     );
 }
+
 export default App;
