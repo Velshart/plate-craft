@@ -1,0 +1,56 @@
+.App {
+  text-align: center;
+  font-size: 300%;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 2rem;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-footer a {
+  color: lightgray;
+  font-size: 40%;
+  position: absolute;
+  bottom: 10px;
+  width: 80%;
+  text-align: center;
+}
+
+.App-footer a:hover {
+  text-decoration: underline;
+  color: skyblue;
+}
+
+.prefixes-form {
+  width: 600px;
+  background: darkgray;
+}
+
+
+.prefixes-form-input-label {
+}
+
+.generate-button {
+  margin-top: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.generated-plate-input {
+  background: darkgray;
+  margin-top: 50px;
+  width: 500px;
+  height: 30px;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
