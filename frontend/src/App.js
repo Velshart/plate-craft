@@ -1,12 +1,14 @@
 import './App.css';
 import Button from "@mui/material/Button";
 import {Checkbox, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select} from "@mui/material";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function App() {
     const [selectedPlate, setSelectedPlate] = useState('');
     const [selectedLetter, setSelectedLetter] = useState('');
     const [error, setError] = useState('');
+    const [apiData, setApiData] = useState([]);
+    const [selectedContent, setSelectedContent] = useState('');
     const [generatedPlateInputText, setGeneratedPlateInputText] = useState('Generated plate:');
 
     const handlePlateChange = (plate) => {
@@ -17,14 +19,29 @@ function App() {
         setSelectedLetter(event.target.value);
     };
 
+
     const handleGenerateButtonClick = () => {
         if (!selectedLetter || !selectedPlate) {
             setError('Some options are missing!');
         } else {
+            fetchApiData();
             setError('');
         }
 
     };
+
+    const handleContentChange = (event) => {
+        setSelectedContent(event.target.value);
+    };
+
+    const fetchApiData = () => {
+        fetch('http://localhost:8081/api/' + selectedPlate + '/' + selectedLetter)
+            .then(response => response.json())
+            .then(data => setApiData(data))
+            .catch(error => {
+                console.error("An error occurred during fetching data", error);
+            });
+    }
 
     const prefixes: string[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
@@ -76,8 +93,20 @@ function App() {
                     </Button>
                 </div>
 
-                <input className={"generated-plate-input"} type={"text"} value={generatedPlateInputText}
-                       readOnly={true}/>
+                <FormControl className={"generated-plate-input-form"}>
+                    <InputLabel id="content-select-label">Here are some plates you may like</InputLabel>
+                    <Select
+                        labelId="content-select-label"
+                        value={selectedContent}
+                        onChange={handleContentChange}
+                    >
+                        {apiData.map((item, index) => (
+                            <MenuItem disabled={true} key={index} value={item.content}>
+                                {item.content}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
 
                 {error && <p className="error-message">{error}</p>}
             </h2>

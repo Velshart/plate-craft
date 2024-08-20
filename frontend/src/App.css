@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  font-size: 300%;
+  font-size: 500%;
 }
 
 .App-header {
@@ -53,4 +53,10 @@
 .error-message {
   color: red;
   margin-top: 10px;
+}
+
+.generated-plate-input-form {
+  margin-top: 20px;
+  width: 300px;
+  background: darkgray;
 }
