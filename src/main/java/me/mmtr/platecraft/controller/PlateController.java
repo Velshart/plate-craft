@@ -1,6 +1,5 @@
 package me.mmtr.platecraft.controller;
 
-import me.mmtr.platecraft.record.Plate;
 import me.mmtr.platecraft.service.PlateService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,22 +19,22 @@ public class PlateController {
 
     @GetMapping("/api/polish/{prefix}")
     public ResponseEntity<?> getPolishCustomPlate(@PathVariable String prefix) {
-        return ResponseEntity.ok(new Plate(plateService.getPolishPlate(prefix)));
+        return ResponseEntity.ok(plateService.getPolishPlates(prefix));
     }
 
     @GetMapping("/api/polish/{prefix}/{length}")
     public ResponseEntity<?> getPolishCustomPlate(@PathVariable String prefix, @PathVariable int length) {
-        return ResponseEntity.ok(new Plate(plateService.getPolishPlate(prefix, length)));
+        return ResponseEntity.ok(plateService.getPolishPlates(prefix, length));
     }
 
     @GetMapping("/api/english/{prefix}")
     public ResponseEntity<?> getEnglishCustomPlate(@PathVariable String prefix) {
-        return ResponseEntity.ok(new Plate(plateService.getEnglishPlate(prefix)));
+        return ResponseEntity.ok(plateService.getEnglishPlates(prefix));
     }
 
 
     @GetMapping("/api/english/{prefix}/{length}")
     public ResponseEntity<?> getEnglishCustomPlate(@PathVariable String prefix, @PathVariable int length) {
-        return ResponseEntity.ok(new Plate(plateService.getEnglishPlate(prefix, length)));
+        return ResponseEntity.ok(plateService.getEnglishPlates(prefix, length));
     }
 }
