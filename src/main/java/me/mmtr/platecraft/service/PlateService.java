@@ -14,39 +14,39 @@ import java.util.Scanner;
 @Service
 public class PlateService {
 
-    private final File polishPlatesFile = new File("polish.txt");
-    private final File englishPlatesFile = new File("english.txt");
+    private final File POLISH_PLATES_FILE = new File("polish.txt");
+    private final File ENGLISH_PLATES_FILE = new File("english.txt");
 
-    private final List<String> polishPlates;
-    private final List<String> englishPlates;
+    private final List<String> POLISH_PLATES;
+    private final List<String> ENGLISH_PLATES;
 
     private final int AMOUNT_OF_PLATES_TO_DRAW = 10;
 
     public PlateService() {
-        this.polishPlates = new ArrayList<>();
-        this.englishPlates = new ArrayList<>();
+        this.POLISH_PLATES = new ArrayList<>();
+        this.ENGLISH_PLATES = new ArrayList<>();
     }
 
     @PostConstruct
     public void init() {
-        loadPlatesFromFile(polishPlatesFile, polishPlates);
-        loadPlatesFromFile(englishPlatesFile, englishPlates);
+        loadPlatesFromFile(POLISH_PLATES_FILE, POLISH_PLATES);
+        loadPlatesFromFile(ENGLISH_PLATES_FILE, ENGLISH_PLATES);
     }
 
     public List<Plate> getPolishPlates(String prefix) {
-        return getPlates(prefix, polishPlates);
+        return getPlates(prefix, POLISH_PLATES);
     }
 
     public List<Plate> getPolishPlates(String prefix, int length) {
-        return getPlates(prefix, polishPlates, length);
+        return getPlates(prefix, POLISH_PLATES, length);
     }
 
     public List<Plate> getEnglishPlates(String prefix) {
-        return getPlates(prefix, englishPlates);
+        return getPlates(prefix, ENGLISH_PLATES);
     }
 
     public List<Plate> getEnglishPlates(String prefix, int length) {
-        return getPlates(prefix, englishPlates, length);
+        return getPlates(prefix, ENGLISH_PLATES, length);
     }
 
     private List<Plate> getPlates(String prefix, List<String> platesCollection) {
